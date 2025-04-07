@@ -8,7 +8,7 @@ public class Main1Test
     {
         // TODO 1.2: Oprav test
         assertEquals(
-                0,
+                62,     //toto mi vyšlo, když jsem spustila "Main1", původně tady místo 62 byla 0 (přepsala jsem to)
                 Main1.emptyActionsCount("KIKM",2024)
         );
     }

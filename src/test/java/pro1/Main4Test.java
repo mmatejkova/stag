@@ -27,7 +27,7 @@ public class Main4Test
         Main4.printShortestEmails("KIKM",5);
         // TODO 4.2: Oprav test
         assertEquals(
-                "jan.vanek@uhk.cz\r\npetr.bauer@uhk.cz\r\njan.budina@uhk.cz\r\nfilip.maly@uhk.cz\r\nkarel.maly@uhk.cz\r\n",
+                "jan.vanek@uhk.cz\npetr.bauer@uhk.cz\njan.budina@uhk.cz\nfilip.maly@uhk.cz\nkarel.maly@uhk.cz\n",     //bylo správně, akorát u macu se píše pouze "/n" a ne "/r/n" co tam bylo předtím
                 outContent.toString()
         );
     }

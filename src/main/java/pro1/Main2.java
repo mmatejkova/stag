@@ -13,16 +13,18 @@ public class Main2 {
 
     public static long maxPersonsCount(String department, int year)
     {
+        //získání a parsování JSON dat o rozvrhových akcích
         String json = Api.getActionsByDepartment(department,year);
         ActionsList actions= new Gson().fromJson(json, ActionsList.class);
 
+        //vyhledání akce s největším počtem osob
         Action result = actions.items.stream()
                 .max(Comparator.comparing(a -> a.personsCount))
                 .get();
         return result.personsCount;
 
-/* NEBO return actions.items.stream()
-.mapToLong(a -> a.personsCount)
-.max().getAsLong();*/
+        // NEBO return actions.items.stream()
+        // .mapToLong(a -> a.personsCount)
+        // .max().getAsLong();
     }
 }

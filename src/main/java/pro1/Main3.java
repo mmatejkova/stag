@@ -14,11 +14,13 @@ public class Main3 {
 
     public static String emailOfBestTeacher(String department, int year)
     {
+        //získání seznamu učitelů a seznamu akcí z API
         String json = Api.getTeachersByDepartment(department);
         String json2 = Api.getActionsByDepartment(department,year);
         TeachersList teachersList = new Gson().fromJson(json,TeachersList.class);
         ActionsList actionsList = new Gson().fromJson(json2, ActionsList.class);
 
+        //najde učitele, který má nejvyšší skóre podle počtu osob ve svých akcích
         return teachersList.items.stream()
                 .max(Comparator.comparing(t -> TeacherScore(t.id, actionsList)))
                 .get().email;
@@ -26,6 +28,7 @@ public class Main3 {
 
     public static long TeacherScore(long teacherId, ActionsList departmentSchedule)
     {
+        //spočítá celkový počet osob ve všech akcích daného učitele
         return departmentSchedule.items.stream()
                 .filter(a -> a.teacherId == teacherId)
                 .mapToLong(a -> a.personsCount)

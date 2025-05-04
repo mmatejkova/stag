@@ -8,20 +8,22 @@ import java.util.Comparator;
 public class Main4 {
 
     public static void main(String[] args) {
-         printShortestEmails("KIKM",5);
+        printShortestEmails("KIKM",5);
     }
 
     public static void printShortestEmails(String department, int count)
     {
+        //získání seznamu učitelů
         String json = Api.getTeachersByDepartment(department);
         TeachersList teachers = new Gson().fromJson(json,TeachersList.class);
 
+        //vyfiltruje učitele s neprázdným e-mailem, seřadí podle délky e-mailu a vytiskne nejkratší
         teachers.items.stream()
                 .filter(t -> t.email != null)
                 .sorted(Comparator.comparing(t->t.email.length()))
                 .limit(count)
                 .forEach(t -> System.out.println(t.email));
 
-// Nebo použít toList a projít ho obyč cyklem
+        //NEBO použít toList a projít ho obyčejným cyklem
     }
 }

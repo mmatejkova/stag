@@ -9,8 +9,13 @@ public class Main1 {
     }
 
     public static long emptyActionsCount(String department, int year) {
+        //získání JSON dat o rozvrhových akcích dané katedry a roku
         String json = Api.getActionsByDepartment(department, year);
+
+        //parsování JSON řetězce do objektu typu ActionsList
         ActionsList actions = new Gson().fromJson(json, ActionsList.class);
+
+        //filtrování akcí, kde je počet osob (obsazení) nula, a jejich spočítání
         return actions.items.stream()
                 .filter(a -> a.personsCount == 0)
                 .count();
